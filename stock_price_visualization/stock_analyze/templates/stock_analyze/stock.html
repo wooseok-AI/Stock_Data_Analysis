@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Stocks Information</title>
+</head>
+<body>
+    <h1>Stocks Information</h1>
+
+    <form method="GET">
+        <label for="name">Stock name:</label>
+        <input type="text" id="name" name="name">
+        <br><br>
+
+        <label for="start_date">Start date:</label>
+        <input type="date" id="start_date" name="start_date" value="2022-05-01">
+        <br><br>
+
+        <label for="end_date">End date:</label>
+        <input type="date" id="end_date" name="end_date" value="2023-05-01"><br><br>
+
+        <button type="submit">Search</button>
+    </form>
+    <br>
+
+    <h2>Stock Information:</h2>
+
+    <ul>
+        <li>Name: {{stock_name}}</li>
+        <li>Listed date: {{listed_date}}</li>
+        <li>Dividend date: {{dividend_date}}</li>
+        <li>Dividend amount: {{dividend_amount}}</li>
+    </ul>
+    <br>
+
+    {% comment %} <div id="chart_div"></div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Month', 'AAPL'],
+                ['May 2022', 129.14],
+                ['June 2022', 139.96],
+                ['July 2022', 145.86],
+                ['August 2022', 152.51],
+                ['September 2022', 146.06],
+                ['October 2022', 157.55],
+                ['November 2022', 166.71],
+                ['December 2022', 172.24],
+                ['January 2023', 170.40],
+                ['February 2023', 181.16],
+                ['March 2023', 188.78],
+                ['April 2023', 177.50],
+                ['May 2023', 174.94]
+            ]);
+            var options = {
+                title: 'AAPL Stock Price',
+                hAxis: {
+                    title: 'Month'
+                },
+                vAxis: {
+                    title: 'Price (USD)'
+                }
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script> {% endcomment %}
+
+
+
+
+
+    <!--matplotlib 으로 시각화-->
+
+
+
+    
+
+</body>
+</html>
