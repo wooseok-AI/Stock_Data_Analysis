@@ -39,7 +39,7 @@
     <br> {% endcomment %}
 
     <div id="chart_div"></div>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
@@ -72,6 +72,18 @@
             var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
             chart.draw(data, options);
         }
-    </script>
+    </script> -->
+    <div>
+        {% if chart %}
+            <b>Stock Dataframe</b>
+            {{ sales_df|safe }}
+            <hr>
+            <hr>
+            <b>Chart</b>
+            <img src="data:image/png;base64, {{chart|safe }}" alt="" id="img">
+        {% endif %}
+    </div>
+
+
 </body>
 </html>
