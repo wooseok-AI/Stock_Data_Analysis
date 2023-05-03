@@ -95,7 +95,7 @@ def index(request):
 
     price_data_df = pd.DataFrame(price_data.values())[["date", "close_price"]]
     price_data_df["date"] = price_data_df["date"].apply(lambda x : pd.to_datetime(str(x).split()[0]))
-    print(price_data_df.head())
+    
     chart = get_chart(price_data_df)
 
 
