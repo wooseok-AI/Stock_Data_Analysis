@@ -4,7 +4,10 @@ from django.http import HttpResponse
 from datetime import datetime
 from .models import Stock, Price
 
+import pandas as pd
 import csv
+
+from .utils import get_chart
 
 # Create your views here.
 # def index(request):
@@ -42,7 +45,7 @@ def index(request):
             face_value = 50
             num_of_stocks = 1000
 
-            date = datetime.strptime(row[0], '%Y.%m.%d')
+            date = datetime.strptime(row[0], "%Y.%m.%d").date()
 
             # open_price = int(row[3])
             # close_price = int(row[1])
@@ -86,11 +89,17 @@ def index(request):
     print()
     print()
     print()
-    print(stock_data.values()[0])
+    print(price_data.values()[0])
     print()
     print()
 
-    return render(request, "stock_analyze/index.html", {"stock_data": stock_data, "price_data": price_data})    
+    price_data_df = pd.DataFrame(price_data.values())[["date", "close_price"]]
+    price_data_df["date"] = price_data_df["date"].apply(lambda x : pd.to_datetime(str(x).split()[0]))
+    print(price_data_df.head())
+    chart = get_chart(price_data_df)
+
+
+    return render(request, "stock_analyze/index.html", {"stock_data": stock_data, "price_data": price_data, "chart":chart})    
 
 
 # 검색 기능
