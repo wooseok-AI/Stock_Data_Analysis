@@ -13,17 +13,17 @@
         <br><br>
 
         <label for="start_date">Start date:</label>
-        <input type="date" id="start_date" name="start_date" value="2022-05-01">
+        <input type="date" id="start_date" name="start_date" value={% if start_date %} {{start_date}} {% else %}"2022-05-01"{% endif %}>
         <br><br>
 
         <label for="end_date">End date:</label>
-        <input type="date" id="end_date" name="end_date" value="2023-05-01"><br><br>
+        <input type="date" id="end_date" name="end_date" value={% if end_date %} {{end_date}} {% else %}"2023-05-01"{% endif %}<br><br>
 
         <label for="chart_type">Chart_type:</label>
-        
-        <input type="radio" id="chart_type1" name="chart_type" value="line_plot">
+
+        <input type="radio" id="chart_type1" name="chart_type" value="line_plot" {% if chart_type == "line_plot" %}  checked="checked" {% endif %} >
         <label for="chart_type1">line_plot</label>
-        <input type="radio" id="chart_type2" name="chart_type" value="bar_plot">
+        <input type="radio" id="chart_type2" name="chart_type" value="bar_plot" {% if chart_type == "bar_plot" %}  checked="checked" {% endif %} >
         <label for="chart_type1">bar_plot</label>
         
         <br><br>

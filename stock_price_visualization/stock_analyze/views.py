@@ -35,7 +35,13 @@ def stock_info(request):
                 fig = plt.figure(figsize=(10, 4))
                 chart = get_chart(price_data_df, chart_type=chart_type, fig=fig)
 
-                context = {'stock_data': stock_data, 'price_data' : price_data_df.to_html(), 'chart' : chart}
+                context = {
+                            'stock_data': stock_data,
+                            'price_data': price_data_df.to_html(),
+                            'chart': chart, 'chart_type': chart_type,
+                            'start_date': start_date,
+                            'end_date': end_date
+                           }
                 return render(request, "stock_analyze/index.html", context)
         else:
             error_message = 'There is no stock data for the specified period.'
