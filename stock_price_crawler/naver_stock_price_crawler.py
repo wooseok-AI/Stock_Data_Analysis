@@ -39,7 +39,7 @@ headers = {
     }
 
 full_stocks = []
-for page in range(1, 11):
+for page in range(1, 675):
     url = "https://finance.naver.com/item/sise_day.naver?code=005930&page={}".format(page)
 
     res = requests.get(url, headers=headers)
