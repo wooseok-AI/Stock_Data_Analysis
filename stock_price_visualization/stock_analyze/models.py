@@ -20,7 +20,7 @@ class Stock(models.Model):
     num_of_stocks = models.IntegerField(default = 0)
 
 class Price(models.Model):
-    stock = models.ForeignKey(Stock, on_delete = models.CASCADE)
+    # stock = models.ForeignKey(Stock, on_delete = models.CASCADE)
     date = models.DateTimeField()
 
     # 시가, 종가, 최고가, 최저가
