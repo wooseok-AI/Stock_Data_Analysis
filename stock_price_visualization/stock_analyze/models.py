@@ -4,20 +4,20 @@ class Stock(models.Model):
     stock_name = models.CharField(max_length = 50)
 
     # 표준코드
-    standard_code = models.CharField(max_length = 20) 
+    standard_code = models.CharField(max_length = 20, default = "000000") 
 
     # 상장일
-    listing_date = models.DateField()
+    listing_date = models.DateField(null = True)
 
     # 배당일, 배당금
     dividend_date = models.DateField(null = True)
     dividend_amount = models.IntegerField(null = True)
 
     # 액면가
-    face_value = models.IntegerField()
+    face_value = models.IntegerField(default = 0)
 
     # 상장주식수
-    num_of_stocks = models.IntegerField()
+    num_of_stocks = models.IntegerField(default = 0)
 
 class Price(models.Model):
     stock = models.ForeignKey(Stock, on_delete = models.CASCADE)

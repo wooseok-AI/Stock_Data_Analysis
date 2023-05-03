@@ -25,13 +25,18 @@
 
     <h2>Stock Information:</h2>
 
-    <ul>
+    {% for stock in stock_data %}
+        <p> {{stock.stock_name}} </p>
+        <p> {{stock.standard_code}} </p>
+    {% endfor %}
+
+    {% comment %} <ul>
         <li>Name: {{stock_name}}</li>
         <li>Listed date: {{listed_date}}</li>
         <li>Dividend date: {{dividend_date}}</li>
         <li>Dividend amount: {{dividend_amount}}</li>
     </ul>
-    <br>
+    <br> {% endcomment %}
 
     <div id="chart_div"></div>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
