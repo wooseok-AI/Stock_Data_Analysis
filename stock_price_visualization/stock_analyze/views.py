@@ -21,6 +21,8 @@ def stock_info(request):
         stock_name = request.GET.get("name")
         start_date = request.GET.get("start_date")
         end_date = request.GET.get("end_date")
+        chart_type = request.GET.get("chart_type")
+
         print(stock_name, start_date, end_date)
         stock_data = Stock.objects.all()
         print("Request")
@@ -31,7 +33,7 @@ def stock_info(request):
                 price_data_df = price_data_df.groupby("date")["close_price"].last().reset_index()
                 print(price_data_df.head())
                 fig = plt.figure(figsize=(10, 4))
-                chart = get_chart(price_data_df, fig=fig)
+                chart = get_chart(price_data_df, chart_type=chart_type, fig=fig)
 
                 context = {'stock_data': stock_data, 'price_data' : price_data_df.to_html(), 'chart' : chart}
                 return render(request, "stock_analyze/index.html", context)
