@@ -17,28 +17,27 @@ def preprocessing(data):
     """
     pass
 
-def get_png():
+def get_chart(data, chart_type="line_plot", fig=None, **kwargs):
+    
+    if fig is None:
+        fig = plt.figure(figsize=(10, 4))
+    if chart_type == "line_plot":
+        plt.plot(data["date"], data["close_price"], color="navy", linewidth=3)
+    elif chart_type == "bar_plot":
+        plt.bar(data["date"], data["close_price"], color="navy", linewidth=3)
+
+    plt.tight_layout()
+    chart = get_png(fig)
+
+    return chart
+
+
+def get_png(fig):
     buffer = BytesIO()
-    plt.savefig(buffer, format='png')
+    fig.savefig(buffer, format='png')
     buffer.seek(0)
     image_png = buffer.getvalue()
     graph = base64.b64encode(image_png)
     graph = graph.decode('utf-8')
     buffer.close()
     return graph
-
-
-def get_chart(data, chart_type = "line_plot", **kwargs):
-    
-    plt.switch_backend("AGG")
-    fig = plt.figure(figsize=(10,4))
-
-    if chart_type == "line_plot":
-        plt.plot(data["date"], data["close_price"], color="navy", linewidth=3)
-    elif chart_type == "bar_plot":
-        plt.bar(data["date"], data["close_price"], color="navy", linewidth=3)
-    
-    plt.tight_layout()
-    chart = get_png()
-
-    return chart
