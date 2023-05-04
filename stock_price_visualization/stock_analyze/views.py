@@ -13,8 +13,9 @@ from .utils import get_chart
 plt.switch_backend("AGG")
 
 def index(request):
+    stock_data = Stock.objects.all()
 
-    return render(request, "stock_analyze/index.html")    
+    return render(request, "stock_analyze/index.html", {"stock_data": stock_data})    
 
 def stock_info(request):
     if request.method == "GET":
