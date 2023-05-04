@@ -100,14 +100,6 @@ $
     ├── manage.py
     ├── stock_analyze
     │   ├── __init__.py
-    │   ├── __pycache__
-    │   │   ├── __init__.cpython-39.pyc
-    │   │   ├── admin.cpython-39.pyc
-    │   │   ├── apps.cpython-39.pyc
-    │   │   ├── models.cpython-39.pyc
-    │   │   ├── urls.cpython-39.pyc
-    │   │   ├── utils.cpython-39.pyc
-    │   │   └── views.cpython-39.pyc
     │   ├── admin.py
     │   ├── apps.py
     │   ├── management
@@ -118,15 +110,6 @@ $
     │   │       │   └── db_command.cpython-39.pyc
     │   │       └── db_command.py
     │   ├── migrations
-    │   │   ├── 0001_initial.py
-    │   │   ├── 0002_stock_face_value_stock_num_of_stocks_and_more.py
-    │   │   ├── 0003_remove_price_stock.py
-    │   │   ├── __init__.py
-    │   │   └── __pycache__
-    │   │       ├── 0001_initial.cpython-39.pyc
-    │   │       ├── 0002_stock_face_value_stock_num_of_stocks_and_more.cpython-39.pyc
-    │   │       ├── 0003_remove_price_stock.cpython-39.pyc
-    │   │       └── __init__.cpython-39.pyc
     │   ├── models.py
     │   ├── templates
     │   │   └── stock_analyze
