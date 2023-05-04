@@ -19,7 +19,7 @@ def index(request):
 
 def stock_info(request):
     if request.method == "GET":
-        stock_name = request.GET.get("name")
+        stock_name = request.GET.get("name_input")
         start_date = request.GET.get("start_date")
         end_date = request.GET.get("end_date")
         chart_type = request.GET.get("chart_type")
@@ -38,6 +38,7 @@ def stock_info(request):
                 chart = get_chart(price_data_df, chart_type=chart_type, fig=fig)
 
                 context = {
+                            'name_input' : stock_name,
                             'stock_data': stock_data,
                             'price_data': price_data_df.to_html(),
                             'chart': chart, 'chart_type': chart_type,

@@ -24,9 +24,31 @@ def get_chart(data, chart_type="line_plot", fig=None, **kwargs):
     if fig is None:
         fig = plt.figure(figsize=(10, 4))
     if chart_type == "line_plot":
+        plt.title("line_plot")
         plt.plot(data["date"], data["close_price"], color="navy", linewidth=3)
     elif chart_type == "bar_plot":
+        plt.title("bar_plot")
         plt.bar(data["date"], data["close_price"], color="navy", linewidth=3)
+    # 중복 그래프 출력
+    elif chart_type == "trend_line":
+        # 추세선 그래프
+        ma5 = data["close_price"].rolling(window=5).mean()
+        ma20 = data["close_price"].rolling(window=20).mean()
+        ma60 = data["close_price"].rolling(window=60).mean()
+        ma120= data["close_price"].rolling(window=120).mean()
+
+        data.insert(len(data.columns), "MA5", ma5)
+        data.insert(len(data.columns), "MA20", ma20)
+        data.insert(len(data.columns), "MA60", ma60)
+        data.insert(len(data.columns), "MA120", ma120)
+
+        plt.plot(data["date"], data['close_price'], label='Close_price')
+        plt.plot(data["date"], data['MA5'], label='5d average')
+        plt.plot(data["date"], data['MA20'], label='20d average')
+        plt.plot(data["date"], data['MA60'], label='60d average')
+        plt.plot(data["date"], data['MA120'], label='120d average')
+        plt.legend()
+
     elif chart_type == "candle_plot":
         data = data.rename(
             columns={'close_price': 'Close', 'open_price': 'Open', 'high_price': 'High', 'low_price': 'Low',
@@ -44,7 +66,7 @@ def get_chart(data, chart_type="line_plot", fig=None, **kwargs):
 
 def get_png(chart_type, fig, data):
     buffer = BytesIO()
-    if chart_type in ('line_plot', 'bar_plot'):
+    if chart_type in ('line_plot', 'bar_plot', 'trend_line'):
         fig.savefig(buffer, format='png')
     else:
         color_set = mf.make_marketcolors(up='tab:red', down='tab:blue')

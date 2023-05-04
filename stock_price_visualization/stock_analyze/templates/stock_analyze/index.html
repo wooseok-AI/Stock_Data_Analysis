@@ -93,7 +93,7 @@
         <form method="GET" action="/stock_info/">
             <section id = "stock_name_section">
                 <h3>종목명</h3>
-                <input type="text" id="name_input" name="name">
+                <input type="text" id="name_input" name="name_input" value={% if name_input %} {{name_input}} {% else %}""{% endif %}>
             </section>
             <br>
 
@@ -122,6 +122,12 @@
                 
                 <input type="radio" id="chart_type2" name="chart_type" value="bar_plot" {% if chart_type == "bar_plot" %}  checked="checked" {% endif %} >
                 <label for="chart_type1">막대형</label>
+
+                <input type="radio" id="chart_type3" name="chart_type" value="candle_plot" {% if chart_type == "candle_plot" %}  checked="checked" {% endif %} >
+                <label for="chart_type1">캔들형</label>
+
+                <input type="radio" id="chart_type4" name="chart_type" value="trend_line" {% if chart_type == "trend_line" %}  checked="checked" {% endif %} >
+                <label for="chart_type1">추세선</label>
             </section>
             <br><br>
 
