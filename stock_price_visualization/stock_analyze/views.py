@@ -28,10 +28,10 @@ def stock_info(request):
         print("Request")
         price_data = Price.objects.filter(date__range=[start_date, end_date])
         if price_data.exists():
-                price_data_df = pd.DataFrame(price_data.values())[["date", "close_price"]]
+                price_data_df = pd.DataFrame(price_data.values())
+
                 price_data_df["date"] = price_data_df["date"].apply(lambda x : pd.to_datetime(str(x).split()[0]))
-                price_data_df = price_data_df.groupby("date")["close_price"].last().reset_index()
-                print(price_data_df.head())
+                price_data_df = price_data_df.groupby("date")["open_price", "close_price", "high_price", "low_price"].last().reset_index()
                 fig = plt.figure(figsize=(10, 4))
                 chart = get_chart(price_data_df, chart_type=chart_type, fig=fig)
 
@@ -42,12 +42,12 @@ def stock_info(request):
                             'start_date': start_date,
                             'end_date': end_date
                            }
-                return render(request, "stock_analyze/index.html", context)
+                return render(request, "stock_analyze/stock.html", context)
         else:
             error_message = 'There is no stock data for the specified period.'
             context = {'error_message': error_message}
-            return render(request, 'stock_analyze/index.html', context)
+            return render(request, 'stock_analyze/stock.html', context)
     else:
         error_message = 'Please enter stock name and date range.'
         context = {'error_message': error_message}
-        return render(request, 'stock_analyze/index.html', context)
+        return render(request, 'stock_analyze/stock.html', context)
