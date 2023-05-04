@@ -3,7 +3,7 @@
 해당 프로젝트는 주식 가격에 대한 기간 별 검색 및 다양한 차트의 반환을 목표로 [Django](https://www.djangoproject.com/)를 이용한 서비스의 형태로 개발하였으며, [Grepp] KDT 데이터 엔지니어링 데브코스에서 진행하는 1차 프로젝트 결과물의 일환이다. <br>
 
 
-<img src="https://user-images.githubusercontent.com/56491233/236193551-74dea089-8030-462c-a550-d08b91fe3c99.gif" width="50%" height="50%">
+<img src="https://user-images.githubusercontent.com/56491233/236197647-61e304d4-69f0-4cbd-81ad-bb8f336dd806.gif">
 
 | Features
 
