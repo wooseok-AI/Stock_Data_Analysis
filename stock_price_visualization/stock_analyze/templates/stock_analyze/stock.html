@@ -3,48 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <title>Stocks Information</title>
+
+    <style>
+        #header {
+            color: #86A5FF;
+            border-bottom: 1px solid #90AFFF;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+        }
+
+        #header a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        #search_form {
+            padding: 10px;
+            background-color: #CCE1FF;
+        }
+
+        #stock_name_section {
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+
+        #name_input {
+            width: 180px;
+            height: 30px;
+            border: none;
+        }
+
+        .date_div {
+            float: left;
+        }
+
+        .date_div input {
+            height: 30px;
+            border: none;
+        }
+
+        #intersect_div {
+            margin-left: 50px;
+            font-size: 25px;
+        }
+
+        #date_end_div {
+            margin-left: 50px;
+        }
+
+        #chart_type_section {
+            margin-top: 30px;
+        }
+
+        #search_button {
+            background-color: white;
+            width: 120px;
+            height: 40px;
+            font-size: 15px;
+            border-radius: 5px;
+            border: 2px solid;
+        }
+
+        #chart_section {
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px 10px;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Stocks Information</h1>
+    <header id = "header">
+        <a href = "../"><h1>Stocks Info</h1></a>
+    </header>
 
-    <form method="GET" action="/stock_info/">
-        <label for="name">Stock name:</label>
-        <input type="text" id="name" name="name">
-        <br><br>
+    <div id = "search_form">
+        <h2>주식 종목 검색</h2>
 
-        <label for="start_date">Start date:</label>
-        <input type="date" id="start_date" name="start_date" value={% if start_date %} {{start_date}} {% else %}"2022-05-01"{% endif %}>
-        <br><br>
+        <form method="GET" action="/stock_info/">
+            <section id = "stock_name_section">
+                <h3>종목명</h3>
+                <input type="text" id="name_input" name="name">
+            </section>
+            <br>
 
-        <label for="end_date">End date:</label>
-        <input type="date" id="end_date" name="end_date" value={% if end_date %} {{end_date}} {% else %}"2023-05-01"{% endif %}><br>
-        <br>
+            <section id = "stock_date_section">
+                <h3>기간</h3>
 
-        <label for="chart_type">Chart_type:</label>
+                <div id = "date_start_div" class = "date_div">
+                    <input type="date" id="start_date" name="start_date" value={% if start_date %} {{start_date}} {% else %}"2022-05-01"{% endif %}>
+                </div>
 
-        <input type="radio" id="chart_type1" name="chart_type" value="line_plot" {% if chart_type == "line_plot" %}  checked="checked" {% endif %} >
-        <label for="chart_type1">line_plot</label>
-        <input type="radio" id="chart_type2" name="chart_type" value="bar_plot" {% if chart_type == "bar_plot" %}  checked="checked" {% endif %} >
-        <label for="chart_type1">bar_plot</label>
-        <input type="radio" id="chart_type3" name="chart_type" value="candle_plot" {% if chart_type == "candle_plot" %}  checked="checked" {% endif %} >
-        <label for="chart_type1">candle_plot</label>
+                <div id = "intersect_div" class = "date_div">
+                    <span>~</span>
+                </div>
 
-        
-        <br><br>
-        <button type="submit">Search</button>
-    </form>
+                <div id = "date_end_div" class = "date_div">
+                    <input type="date" id=" end_date" name="end_date" value={% if end_date %} {{end_date}} {% else %}"2023-05-01"{% endif %}><br>
+                </div>
+            </section>
+            <br><br><br>
+
+            <section id = "chart_type_section">
+            <h3>차트 유형</h3>
+
+                <input type="radio" id="chart_type1" name="chart_type" value="line_plot" {% if chart_type == "line_plot" %}  checked="checked" {% endif %} >
+                <label for="chart_type1">선형</label>
+                
+                <input type="radio" id="chart_type2" name="chart_type" value="bar_plot" {% if chart_type == "bar_plot" %}  checked="checked" {% endif %} >
+                <label for="chart_type1">막대형</label>
+            </section>
+            <br><br>
+
+            <button type="submit" id = "search_button"><b>종목 검색</b></button>
+        </form>
+    </div>
     <br>
 
-    <ul>
-        <li>Name: 삼성전자</li>
-        <li>Listed date: 1975. 6. 11.</li>
-        <li>Dividend date: 미정</li>
-        <li>Dividend amount: 361원</li>
-    </ul>
-    <br>
-
+    <section id = "chart_section">
     {% if chart %}
-        <h2>Stock Information:</h2>
+        <h2>주가 추이 및 지표</h2>
+
+        <table>
+            <tr align = "center" bgcolor = "#CCE1FF">
+                <th>종목명</th>
+                <th>기간</th>
+                <th>차트 유형</th>
+            </tr>
+
+            <tr>
+                <th>삼성전자</th>
+                <th>{{start_date}} ~ {{end_date}}</th>
+                <th>{{chart_type}}</th>
+            </tr>
+        </table>
+        <br>
 
         <div id="chart_div"></div>
         <div>
@@ -52,11 +150,11 @@
             {{ price_data|safe }} -->
             <hr>
             <hr>
-            <b>Chart</b>
             <img src="data:image/png;base64, {{chart|safe }}" alt="" id="img">
         </div>
 
     {% endif %}
+    </section>
 
 </body>
 </html>
