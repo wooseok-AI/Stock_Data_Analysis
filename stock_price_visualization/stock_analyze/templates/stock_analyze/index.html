@@ -17,7 +17,8 @@
         <br><br>
 
         <label for="end_date">End date:</label>
-        <input type="date" id="end_date" name="end_date" value={% if end_date %} {{end_date}} {% else %}"2023-05-01"{% endif %}<br><br>
+        <input type="date" id="end_date" name="end_date" value={% if end_date %} {{end_date}} {% else %}"2023-05-01"{% endif %}><br>
+        <br>
 
         <label for="chart_type">Chart_type:</label>
 
@@ -30,34 +31,11 @@
         <button type="submit">Search</button>
     </form>
     <br>
-    {% comment %} <ul>
-        <li>Name: {{stock_name}}</li>
-        <li>Listed date: {{listed_date}}</li>
-        <li>Dividend date: {{dividend_date}}</li>
-        <li>Dividend amount: {{dividend_amount}}</li>
-    </ul>
-    <br> {% endcomment %}
 
-    {% if chart %}
-        <h2>Stock Information:</h2>
-
-        {% for stock in stock_data %}
-            <p> {{stock.stock_name}} </p>
-            <p> {{stock.standard_code}} </p>
-        {% endfor %}
-
-        <div id="chart_div"></div>
-        <div>
-            <!-- <b>Stock Dataframe</b>
-            {{ price_data|safe }} -->
-            <hr>
-            <hr>
-            <b>Chart</b>
-            <img src="data:image/png;base64, {{chart|safe }}" alt="" id="img">
-        </div>
-    {% endif %}
-
-
+    {% for stock in stock_data %}
+                <p> {{stock.stock_name}} </p>
+                <p> {{stock.standard_code}} </p>
+    {% endfor %}
 
 </body>
 </html>

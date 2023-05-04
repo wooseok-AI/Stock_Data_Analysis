@@ -13,8 +13,9 @@ from .utils import get_chart
 plt.switch_backend("AGG")
 
 def index(request):
+    stock_data = Stock.objects.all()
 
-    return render(request, "stock_analyze/index.html")    
+    return render(request, "stock_analyze/index.html", {"stock_data": stock_data})    
 
 def stock_info(request):
     if request.method == "GET":
@@ -42,12 +43,12 @@ def stock_info(request):
                             'start_date': start_date,
                             'end_date': end_date
                            }
-                return render(request, "stock_analyze/index.html", context)
+                return render(request, "stock_analyze/stock.html", context)
         else:
             error_message = 'There is no stock data for the specified period.'
             context = {'error_message': error_message}
-            return render(request, 'stock_analyze/index.html', context)
+            return render(request, 'stock_analyze/stock.html', context)
     else:
         error_message = 'Please enter stock name and date range.'
         context = {'error_message': error_message}
-        return render(request, 'stock_analyze/index.html', context)
+        return render(request, 'stock_analyze/stock.html', context)
