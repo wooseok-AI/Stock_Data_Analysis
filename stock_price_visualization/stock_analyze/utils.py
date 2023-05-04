@@ -49,7 +49,7 @@ def get_png(chart_type, fig, data):
     else:
         color_set = mf.make_marketcolors(up='tab:red', down='tab:blue')
         s = mf.make_mpf_style(marketcolors=color_set)
-        mf.plot(data, type='candle', style=s, figsize=(10, 4), savefig=dict(fname=buffer, dpi=100, pad_inches=0.25))
+        mf.plot(data, type='candle', style=s, figsize=(10, 4), datetime_format=' %Y-%m-%d', xrotation=0, savefig=dict(fname=buffer, dpi=100, pad_inches=0.25))
     buffer.seek(0)
     image_png = buffer.getvalue()
     graph = base64.b64encode(image_png)
