@@ -80,6 +80,21 @@
             border: 2px solid;
         }
 
+        #pagination_link_div {
+            display: flex;
+            justify-content: center;
+        }
+
+        #pagination_link_div a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: blue;
+        }
+
+        #curr_page_a {
+            color: red;
+        }
+
     </style>
 </head>
 <body>
@@ -146,7 +161,7 @@
             <th>상장주식수</th>
         </tr>
 
-        {% for stock in stock_data %}
+        {% for stock in stocks %}
             <tr>
                 <td> {{forloop.counter}} </td>
                 <td> {{stock.stock_name}} </td>
@@ -156,7 +171,32 @@
                 <td> {{stock.num_of_stocks}} </td>
             </tr>
         {% endfor %}
+
     </table>
+    <br>
+
+    <div id = "pagination_link_div">
+        {% if stocks.has_other_pages %}
+            {% if stocks.has_previous %}
+                <a href = "?page=1">&laquo;</a>
+                <a href="?page={{ stocks.previous_page_number }}">Prev</a>
+            {% endif %}
+            
+            {% for i in custom_range %}
+                {% if stocks.number == i %}
+                    <a id = "curr_page_a"> {{ i }} [current] </a>
+                {% else %}
+                    <a href="?page={{ i }}">{{ i }}</a>
+                {% endif %}
+            {% endfor %}
+            
+            {% if stocks.has_next %}
+                <a href="?page={{ stocks.next_page_number }}">Next</a>
+                <a href = "?page={{stocks.paginator.num_pages}}">&raquo;</a>
+            {% endif %}
+
+        {% endif %}
+    </div>
 
 </body>
 </html>
