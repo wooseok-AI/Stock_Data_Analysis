@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from datetime import datetime
 from .models import Stock, Price
@@ -15,7 +16,37 @@ plt.switch_backend("AGG")
 def index(request):
     stock_data = Stock.objects.all()
 
-    return render(request, "stock_analyze/index.html", {"stock_data": stock_data})    
+    paginator = Paginator(stock_data, 30)
+    page = request.GET.get("page")
+
+    try:
+        stocks = paginator.page(page)
+
+    except PageNotAnInteger:
+        page = 1
+        stocks = paginator.page(page)
+
+    except EmptyPage:
+        page = paginator.num_pages
+        stocks = paginator.page(page)
+
+    left_index = int(page) - 2
+    if left_index < 1:
+        left_index = 1
+
+    right_index = int(page) + 2
+    if right_index > paginator.num_pages:
+        right_index = paginator.num_pages
+
+    custom_range = range(left_index, right_index + 1)
+
+    if int(page) <= 2:
+        custom_range = range(1, 6)
+
+    if int(page) >= paginator.num_pages - 2:
+        custom_range = range(paginator.num_pages - 4, paginator.num_pages + 1)
+
+    return render(request, "stock_analyze/index.html", {"stocks": stocks, "custom_range": custom_range})    
 
 def stock_info(request):
     if request.method == "GET":
