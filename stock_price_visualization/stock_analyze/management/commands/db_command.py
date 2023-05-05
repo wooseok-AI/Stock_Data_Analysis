@@ -35,21 +35,26 @@ class Command(BaseCommand):
 
                     stock.save()
 
-        # CSV µ¥ÀÌÅÍ ¸ðµ¨¿¡ ÀúÀå
+        # CSV ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ðµ¨¿ï¿½ ï¿½ï¿½ï¿½ï¿½
         with open('stocks.csv', 'r') as f:
             reader = csv.reader(f)
-            next(reader)  # Ã¹¹øÂ° ÇàÀº Çì´õÀÌ¹Ç·Î °Ç³Ê¶Ý´Ï´Ù.
+            next(reader)  # Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ì¹Ç·ï¿½ ï¿½Ç³Ê¶Ý´Ï´ï¿½.
 
             for row in reader:
                 date = datetime.strptime(row[0], "%Y.%m.%d").date()
 
-                open_price = int(row[3][0:2] + row[3][3:])
-                close_price = int(row[1][0:2] + row[1][3:])
-                high_price = int(row[4][0:2] + row[4][3:])
-                low_price = int(row[5][0:2] + row[5][3:])
+
+                open_price = int("".join(row[3].split(",")))
+                close_price = int("".join(row[1].split(",")))
+                high_price = int("".join(row[4].split(",")))
+                low_price = int("".join(row[5].split(",")))
+                # open_price = int(row[3][0:2] + row[3][3:])
+                # close_price = int(row[1][0:2] + row[1][3:])
+                # high_price = int(row[4][0:2] + row[4][3:])
+                # low_price = int(row[5][0:2] + row[5][3:])
             
 
-                # Price °´Ã¼¸¦ »ý¼ºÇÕ´Ï´Ù.
+                # Price ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
                 price = Price(
                     date=date,
                     open_price=open_price,
