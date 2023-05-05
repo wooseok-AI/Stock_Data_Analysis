@@ -28,6 +28,7 @@ def get_chart(data, chart_type="line_plot", fig=None, **kwargs):
         plt.plot(data["date"], data["close_price"], color="navy", linewidth=3)
     elif chart_type == "bar_plot":
         plt.title("bar_plot")
+        plt.ylim()
         plt.bar(data["date"], data["close_price"], color="navy", linewidth=3)
     # 중복 그래프 출력
     elif chart_type == "trend_line":

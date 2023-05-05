@@ -28,3 +28,4 @@ class Price(models.Model):
     close_price = models.IntegerField()
     high_price = models.IntegerField()
     low_price = models.IntegerField()
+    company_name = models.CharField(max_length = 20, default = "")
